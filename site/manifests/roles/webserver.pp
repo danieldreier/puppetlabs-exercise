@@ -1,9 +1,6 @@
 # Everything needed to set up a base webserver
-# Wraps apache module, adds firewall
-class site::roles::webserver (
-  $vhosts = {},
-  ) {
-
+# Wraps nginx module, adds firewall
+class site::roles::webserver {
   class { 'nginx': }
 
   firewall { '102 allow http':
@@ -15,7 +12,4 @@ class site::roles::webserver (
   file { [ '/var/www' ]:
     ensure => 'directory',
   }
-
 }
-
-
