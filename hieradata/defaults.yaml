@@ -1,7 +1,4 @@
 ---
-ntp::restrict:
-  - 127.0.0.1
-ntp::enable: true
 nginx::nginx_vhosts:
   'www.example.com':
     www_root: '/var/www/example.com'
