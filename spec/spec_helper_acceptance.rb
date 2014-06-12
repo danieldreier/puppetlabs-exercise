@@ -18,7 +18,7 @@ hosts.each do |host|
   on host, 'touch /etc/puppet/hiera.yaml'
   install_package host, 'rubygems'
   install_package host, 'git'
-  on host, 'hash librarian_puppet || gem install librarian-puppet --no-ri --no-rdoc'
+  on host, 'hash r10k || gem install r10k --no-ri --no-rdoc'
   scp_to host, 'Puppetfile', '/etc/puppet/Puppetfile'
   scp_to host, 'example/hiera.yaml', '/etc/puppet/hiera.yaml'
   scp_to host, 'example/hiera.yaml', '/etc/hiera.yaml'
@@ -27,7 +27,7 @@ hosts.each do |host|
   # super hacky way to get the fqdn facter fact working; puppet breaks without it
   on host, 'echo "127.0.0.1 $(hostname --short).example.com localhost localhost.localdomain $(hostname --short)" > /etc/hosts'
 
-  on host, "cd /etc/puppet; librarian-puppet install"
+  on host, "cd /etc/puppet; r10k puppetfile install"
 
   proj_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))
   puppet_module_install(:source => "#{proj_root}/site", :module_name => 'site')
