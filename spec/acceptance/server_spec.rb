@@ -4,9 +4,7 @@ describe 'integration', :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily
   context 'running standard install' do
     it 'should run with no errors' do
       pp = <<-EOS
-      class { '::site::roles::base': }
-      class { '::site::roles::webserver': }
-      class { '::site::roles::website': }
+      hiera_include("classes")
       EOS
 
       # Run it twice and test for idempotency

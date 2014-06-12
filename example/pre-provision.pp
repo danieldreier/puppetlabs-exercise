@@ -15,6 +15,11 @@ file { '/etc/hiera.yaml':
   mode   => '0644',
   source => '/vagrant/example/hiera.yaml',
 }
+file { '/etc/puppet/manifests/site.pp':
+  mode    => '0644',
+  content => 'hiera_include("classes")',
+}
+
 file { '/etc/puppet/hiera.yaml':
   ensure => 'link',
   target => '/etc/hiera.yaml',
